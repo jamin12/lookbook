@@ -22,7 +22,7 @@ from database.schema import db
 async def access_control(request: Request, call_next):
     request.state.req_time = D.datetime()
     request.state.start = time.time()
-    #에러 로깅 변수
+    # 에러 로깅 변수
     request.state.inspect = None
     request.state.user = None
     request.state.service = None
@@ -36,7 +36,7 @@ async def access_control(request: Request, call_next):
 
     url = request.url.path
 
-    #url 패턴 체크
+    # url 패턴 체크
     if await url_pattern_check(url,
                                EXCEPT_PATH_REGEX) or url in EXCEPT_PATH_LIST:
         response = await call_next(request)
@@ -60,6 +60,7 @@ async def access_control(request: Request, call_next):
     return response
 
 
+# url 패턴 체크 
 async def url_pattern_check(path, pattern):
     result = re.match(pattern, path)
     if result:
@@ -67,6 +68,7 @@ async def url_pattern_check(path, pattern):
     return False
 
 
+# 에러 핸들러 
 async def exception_handler(error: Exception):
     if isinstance(error, sqlalchemy.exc.OperationalError):
         error = ex.SqlFailureEx(ex=error)
