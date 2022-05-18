@@ -14,6 +14,8 @@ from database.conn import db, Base
 from middlewares.token_validator import access_control
 from middlewares.trusted_hosts import TrustedHostMiddleware
 
+from routes import imgservice
+
 
 def create_app():
     """
@@ -46,6 +48,8 @@ def create_app():
     app.add_middleware(TrustedHostMiddleware,
                        allowed_hosts=conf().TRUSTED_HOSTS,
                        except_path=["/health"])
+    # 라우터 정의
+    app.include_router(imgservice.router,tags=["imgservice"])
     return app
 
 
