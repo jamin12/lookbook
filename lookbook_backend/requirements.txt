@@ -5,3 +5,4 @@ opencv_python == 4.5.5.64
 python-multipart == 0.0.5
 pymysql == 1.0.2
 bs4 == 0.0.1
+requests == 2.27.1
