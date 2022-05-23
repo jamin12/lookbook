@@ -29,8 +29,6 @@ if __name__ == '__main__':
             codi_datail_soup : BeautifulSoup = into_request(codimap_url)
             codi_tags : ResultSet = codi_datail_soup.find_all("div",attrs={"class": "ui-tag-list"})
             for codi_tag in codi_tags:
-                if codi_tag.get_text() in tags:
-                    continue
                 tags.append(codi_tag.get_text())
     with open("tags.txt","w") as f:
         for tag in tags:
