@@ -31,3 +31,14 @@ class APIException(Exception):
         super().__init__(ex)
 
 
+class NotFoundImgEx(APIException):
+    def __init__(self, img_url: str = None, ex: Exception = None):
+        super().__init__(
+            status_code=StatusCode.HTTP_404,
+            msg=f"해당 이미지를 찾을 수 없습니다..",
+            detail=f"Not Found Img url : {img_url}",
+            code=f"{StatusCode.HTTP_400}{'1'.zfill(4)}",
+            ex=ex,
+        )
+
+
