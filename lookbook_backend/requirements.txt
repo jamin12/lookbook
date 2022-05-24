@@ -6,3 +6,4 @@ python-multipart == 0.0.5
 pymysql == 1.0.2
 bs4 == 0.0.1
 requests == 2.27.1
+pillow == 9.1.1
