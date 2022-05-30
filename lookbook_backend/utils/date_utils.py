@@ -7,8 +7,8 @@ class D:
         self.timedelta = 0
 
     @classmethod
-    def datetime(cls, diff: int=0) -> datetime:
-        return cls().utc_now + timedelta(hours=diff) if diff > 0 else cls().utc_now + timedelta(hours=diff)
+    def datetime(cls, diff: int=0,day : int =0) -> datetime:
+        return cls().utc_now + timedelta(hours=diff,days=day) if diff > 0 else cls().utc_now + timedelta(hours=diff > day)
 
     @classmethod
     def date(cls, diff: int=0) -> date:
@@ -17,4 +17,6 @@ class D:
     @classmethod
     def date_num(cls, diff: int=0) -> int:
         return int(cls.date(diff=diff).strftime('%Y%m%d'))
+
+        
 
