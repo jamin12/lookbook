@@ -28,8 +28,6 @@ class weather:
         # print(res.text)
         return res.json()["response"]["body"]["items"]["item"][3]["obsrValue"]
 
-    def test_method(self):
-        self.current_time
 
 
 if __name__ == '__main__':
