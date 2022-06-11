@@ -1,39 +1,48 @@
-import React from 'react';
-import { Modal, Button, } from 'react-bootstrap';
-import styles from '../style/Modal.module.css';
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import TagInput from './TagSearch'
 
-function MydModalWithGrid(props) {
-    return (
-        <Modal
-          {...props}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              Modal heading
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="form-group">
-                <label className='control-label input-radio'>아래에서 원하는 종류를 선택해주세요</label>
-                <input placeholder="이곳에 검색할 태그를 입력해주세요!" type="text" data-select-visible="true"
-                    className="form-control ui-autocomplete-input" autocomplete="off"></input>
-            </div>
-            <div className='tag-group'>
-                <button className="tag-item">
-                    <span className="tag-item-name">1234</span>
-                    <ion-icon name="add-outline"></ion-icon>
-                </button>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      );
-    }
+export default function TagModal() {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     
+    const handleSave = () => {
+        setShow(false)
+        // 입력한 태그를 태그 입력 화면으로 넘기는 코드 추가해야함
+    }
 
-export default MydModalWithGrid;
+
+  
+  
+  return (
+    <>
+        <Button variant="primary" onClick={handleShow} >
+            태그 설정하기
+        </Button>
+
+        <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter"
+        centered>
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">태그 설정하기</Modal.Title>
+            </Modal.Header>
+        
+            <Modal.Body>
+                <TagInput/>
+                <p>123w4</p>
+            </Modal.Body>
+
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    닫기
+                </Button>
+                <Button variant="primary" onClick={handleSave}>
+                    등록하기
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    </>
+  );
+}
