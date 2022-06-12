@@ -12,13 +12,13 @@ from utils.date_utils import  D
 from machinelearning import face_recognize
 from sqlalchemy.orm import Session
 from database.conn import db
-from models import get_tags_name
+from response_models import res_tags_name
 
 IMG_DIR = "./lookbook_backend/machinelearning/img/"
 
 router = APIRouter()
 
-@router.get("/tags",response_model=get_tags_name)
+@router.get("/tags",response_model=res_tags_name)
 async def get_tages(session : Session = Depends(db.session)):
     results : dict = {"tag_name" : ["test1","test2","test3","test4"]}
     return results
