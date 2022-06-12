@@ -18,6 +18,7 @@ IMG_DIR = "./lookbook_backend/machinelearning/img/"
 
 router = APIRouter()
 
-@router.get("/tags",response_model=List[get_tags_name])
+@router.get("/tags",response_model=get_tags_name)
 async def get_tages(session : Session = Depends(db.session)):
-    return ["test1","test2","test3","test4"]
+    results : dict = {"tag_name" : ["test1","test2","test3","test4"]}
+    return results
