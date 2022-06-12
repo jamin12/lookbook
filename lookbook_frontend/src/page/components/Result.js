@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from 'react-router'
 import { Button } from "react-bootstrap";
 import styles from '../style/Result.module.css';
 
 
+
 const Result = (  ) => {
     
+    const [ascii, setAscii] = useState([]);
+    const [base64, setBase64] = useState([]);
+    const [byte, setByte] = useState([]);
+    const [img, setImg] = useState([]);
+
     //처음 화면으로 이동
     const clickBackPage = () =>{
         document.location.href = '/'
@@ -13,7 +19,40 @@ const Result = (  ) => {
 
     const { state } = useLocation();
 
-    console.log(state.tags);
+    const axios = require('axios');
+    
+    function decode(str) {
+        for(var i in base64) {
+            var decodedStr = atob(str[i]);
+            setByte(decodedStr);
+        }
+    }
+
+    const getImg = async() => {
+        const response = await axios.get('http://localhost:8080/results');
+        setAscii(response.data)
+        console.log(ascii)
+        
+        //base64로 인코딩
+        const asciiToBase = ascii.map(ascii => { 
+            JSON.stringify(window.btoa(ascii))
+            // console.log(test)
+        })
+        setBase64(asciiToBase);
+        console.log(JSON.stringify(base64))
+
+        const baseToBytes = base64.map(base64 => {
+            var test = window.atob(base64)
+        })
+        setByte(baseToBytes);
+        console.log(JSON.stringify(byte))
+
+
+
+    }
+    
+
+
     return (
         <div className={styles.main}>
             
@@ -41,12 +80,14 @@ const Result = (  ) => {
                 <Button className={styles.btn} variant="danger" onClick={ clickBackPage } size="lg">
                     처음 화면으로
                 </Button>
+                <Button onClick={getImg}>TEST</Button>
             </body>
             
             <header className={styles.main_header}>
                 {/* <img src="data:image/<이미지확장자>;base64,<data코드>" /> */}
                 {/* 여기 사이트 참고 -> https://im-designloper.tistory.com/57 */}
-                <img className={styles.main_img} alt="기본이미지" src="img/img1.png"/>
+
+                <img className={styles.main_img} alt="기본이미지" src={img[0]}/>
             </header>
         
         </div>
