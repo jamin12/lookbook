@@ -12,6 +12,7 @@ from utils.date_utils import  D
 from machinelearning import face_recognize
 from utils import imgtobytes
 from PIL import Image
+import models as m
 
 IMG_DIR = "./lookbook_backend/machinelearning/img/"
 
@@ -31,7 +32,7 @@ async def uploadImg(in_files: List[UploadFile] = File(...)):
     result : dict = {"predict img" : predict_value}
     return result
 
-@router.get("/results")
+@router.get("/results",response_model=m.get_imgs)
 async def resultPage():
     img_list = []
     for i in range(1,3):
@@ -40,4 +41,5 @@ async def resultPage():
         # img.show('img',img)
         img_converted = await imgtobytes.from_image_to_bytes(img)
         img_list.append(img_converted)
-    return JSONResponse(img_list)
+    results : dict = {"imgs" : img_list}
+    return results
