@@ -16,6 +16,11 @@ export default function Tag(props){
     const [title, setTitle] = useState('');
 
 
+    const [ascii, setAscii] = useState([]);
+    const [base64, setBase64] = useState([]);
+    const [byte, setByte] = useState([]);
+    const [img, setImg] = useState([]);
+
     const navigate = useNavigate();
     // 이전 페이지로 이동
     const clickPrevPage = () => {
@@ -23,17 +28,45 @@ export default function Tag(props){
     }
 
     
-    const onStudy = () => {
+    const onStudy = async() => {
         // 서버쪽에 title이랑 태그값 전달해줘야 함
-        axios.post("url", {
-            title: title,
-            tags: tags
+        const response = await axios.post('http://localhost:8080/results',{
+            'age': 0,
+            "tag_title": "String",
+            "tag_subtitle": "string"
         })
-        .then(Response => {
-            alert("학습이 시작되었습니다.")
-        }).catch(error => {
-            alert("데이터 전달 중 에러 발생!")
-        })
+            .then(response => {
+                console.log("성공")
+                alert("학습이 시작되었습니다.")
+                setAscii(response.data.imgs)
+                console.log(ascii)
+
+                var asciiToBase = []
+                asciiToBase.push(window.btoa(ascii[0]))
+                asciiToBase.push(window.btoa(ascii[1]))
+                setBase64(asciiToBase)
+                console.log(base64)
+
+                var baseToBytes = []
+                baseToBytes.push(window.btoa(base64[0]))
+                baseToBytes.push(window.btoa(base64[1]))
+                setByte(baseToBytes)
+                console.log(byte)
+                var data = byte[0]
+
+                var imgSrc =  "data:image/jpg;base64," + data;
+                setImg(imgSrc)
+                console.log(img)
+            })
+        
+        // console.log(JSON.stringify(base64))
+
+        // // bytes로 디코딩
+        // const baseToBytes = base64.map(base64 => {
+        //     var test = window.atob(base64)
+        // })
+        // setByte(baseToBytes);
+        // console.log(JSON.stringify(byte))
 
         navigate(
             "/result",
