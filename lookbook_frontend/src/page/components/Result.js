@@ -31,18 +31,23 @@ const Result = (  ) => {
     const getImg = async() => {
         const response = await axios.get('http://localhost:8080/results')
             .then(response => {
-                setAscii(response.data)
+                console.log("성공")
+                setAscii(response.data.imgs)
                 console.log(ascii)
+
+                var asciiToBase = []
+                asciiToBase.push(window.btoa(ascii[0]))
+                asciiToBase.push(window.btoa(ascii[1]))
+                console.log(asciiToBase)
+
+                var baseToBytes = []
+                baseToBytes.push()
             })
         
-        //base64로 인코딩
-        const asciiToBase = ascii.map(ascii => { 
-            JSON.stringify(window.btoa(ascii))
-            // console.log(test)
-        })
         setBase64(asciiToBase);
         console.log(JSON.stringify(base64))
 
+        // bytes로 디코딩
         const baseToBytes = base64.map(base64 => {
             var test = window.atob(base64)
         })
