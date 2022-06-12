@@ -33,14 +33,6 @@ async def uploadImg(in_files: List[UploadFile] = File(...)):
     result : dict = {"predict img" : predict_value}
     return result
 
-@router.post("/results",response_model=res_m.res_imgs)
-async def resultPage(request : Request, style_info:req_m.req_result_info):
-    img_list = []
-    for i in range(1,3):
-        img_url = IMG_DIR + f'test{i}.jpg'
-        img = Image.open(img_url)
-        # img.show('img',img)
-        img_converted = await imgtobytes.from_image_to_bytes(img)
-        img_list.append(img_converted)
-    results : dict = {"imgs" : img_list}
-    return results
+@router.get("/result",response_class=FileResponse)
+async def resultPage():
+    return ''.join([IMG_DIR,"test1.jpg"])
