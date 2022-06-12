@@ -1,5 +1,6 @@
 from os import path as op
 import os
+from random import randrange
 import secrets
 from sys import path as sp
 from typing import List
@@ -10,7 +11,7 @@ from fastapi import Request, UploadFile,File,APIRouter
 from fastapi.responses import FileResponse,JSONResponse
 from utils.date_utils import  D
 from machinelearning import face_recognize
-from utils import imgtobytes
+from utils.weather import weather
 from PIL import Image
 import response_models as res_m
 import request_models as req_m
@@ -33,6 +34,15 @@ async def uploadImg(in_files: List[UploadFile] = File(...)):
     result : dict = {"predict img" : predict_value}
     return result
 
-@router.get("/result",response_class=FileResponse)
-async def resultPage():
-    return ''.join([IMG_DIR,"test1.jpg"])
+@router.post("/result",response_class=FileResponse)
+async def resultPage(request: Request,style_info : req_m.req_result_info):
+    season : str = ""
+    temp : str = weather.get_temperature()
+    if float(temp) > 5 and float(temp) < 20:
+        season = "봄/가을"
+    elif float(temp) >= 20 and float(temp) < 30:
+        season = "여름"
+    elif float(temp) < 5:
+        season = "겨울"
+    img_list = os.listdir(IMG_DIR)
+    return ''.join([IMG_DIR,img_list[randrange(0,len(img_list))]])
