@@ -57,7 +57,6 @@ export default function TagModal(props) {
         const response = axios.get('http://localhost:8080/tags')
           .then(response => {
               setSubTag(response.data.tag_name);
-              console.log(subTag)
           })
           .catch(err => {
             console.log(err)

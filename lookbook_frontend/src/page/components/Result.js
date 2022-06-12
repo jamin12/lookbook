@@ -29,9 +29,11 @@ const Result = (  ) => {
     }
 
     const getImg = async() => {
-        const response = await axios.get('http://localhost:8080/results');
-        setAscii(response.data)
-        console.log(ascii)
+        const response = await axios.get('http://localhost:8080/results')
+            .then(response => {
+                setAscii(response.data)
+                console.log(ascii)
+            })
         
         //base64로 인코딩
         const asciiToBase = ascii.map(ascii => { 
