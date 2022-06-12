@@ -1,0 +1,122 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+
+.main_img {
+    /* width: 300px; */
+    height: 100vh;
+    background-color: cadetblue;
+    border: 0;
+}
+
+.main_body{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+
+.main_body > h1 {
+    margin: 100px 0 10px 0px;
+    font-weight: bold;
+    font-size: 3em;
+    font-family: 'Noto Sans KR', sans-serif;
+
+}
+.main_body > p {
+    font-weight: lighter;
+}
+
+
+/* 내용 */
+.contents_prev {
+    margin: 100px 0 0 0px;
+}
+.contents_prev > h4:last-child {
+    padding-top: 10px;
+}
+
+.contents_info_msg {
+    margin: 60px 0 0 0px;
+    color: #868686;
+}
+.contents_info_msg > p:last-child {
+    margin-top: -14px;
+}
+
+.result {
+    width: 100%;
+    word-break: break-all;
+    /* display: flex; */
+}
+
+.result li{
+    list-style: none;
+    display: inline-block;
+    font-size: 1.2em;
+}
+
+.result h4,
+.result li {
+    border: 4px solid #9582e7;
+    border-radius: 50px;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+     line-height: 40px;  /*height랑 비스무리하게 설정해주면 됨  */
+
+    /* 위치 지정  */
+    margin-top: 20px;
+    margin-left: 30px;
+    font-weight: 400;
+}
+
+
+/* 버튼 */
+.btn_group {
+    position: absolute;
+    bottom: 100px;
+    right: 130px;
+}
+
+.btn_group > Button {
+    font-size: 1.5em;
+    padding: 200px, 20px;
+}
+.btn_group > Button:first-child {
+    margin-right: 25px;
+}
+
+
+
+
+/* 모달창 */
+.btn_modal {
+    padding: 10px 30px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 0px;
+    border: 1px solid #868686;
+    color: #000;
+    display: flex;
+    width: 250px;
+}
+.btn_modal:hover {
+    border: 1px solid #868686;
+    background-color: #868686;
+    color: white;
+}
+
+.modal_save_btn {
+    font-size: 1.3em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
