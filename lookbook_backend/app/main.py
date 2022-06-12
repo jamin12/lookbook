@@ -32,7 +32,7 @@ def create_app():
     """
     TODO 임시로 넣은것 더 효율적인 방법 찾아서 다른 곳에다가 넣겠음ㅎ 
     """
-    Base.metadata.create_all(db.engine)
+    # Base.metadata.create_all(db.engine)
     # Base.metadata.drop_all(db.engine)
 
     # 미들웨어 정의
@@ -47,7 +47,7 @@ def create_app():
     )
     app.add_middleware(TrustedHostMiddleware,
                        allowed_hosts=conf().TRUSTED_HOSTS,
-                       except_path=["/health"])
+                       except_path=[])
     # 라우터 정의
     app.include_router(imgservice.router,tags=["imgservice"])
     return app
