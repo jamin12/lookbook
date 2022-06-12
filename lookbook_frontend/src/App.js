@@ -1,8 +1,6 @@
 import Tag from './page/components/Tag';
 import Result from './page/components/Result'
 import Home from './page/components/Home';
-import Test from './page/components/Test';
-// import Router from './page/util/Router'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 
@@ -14,7 +12,6 @@ function App() {
               <Route path="/" exact={true} element={ <Home/> }/> ;
                 <Route path="/tag" element={ <Tag/> }/> ;
                 <Route path="/result" element={ <Result/> }/>;
-                <Route path="/t" element={ <Test/> }/>;
             </Routes>
         </BrowserRouter>
 

@@ -3,11 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import TagTitleRadioBtn from '../Tags/TagTitleRadio'
 import styled from 'styled-components';
+import styles from '../../style/Tag.module.css';
 
 
 export default function TagModal(props) {
     const [show, setShow] = useState(false);
-    const initialTags = ['TEST',];
+    const initialTags = [];
     const [tags, setTags] = useState(initialTags);
     const [title, setTitle] = useState('');
 
@@ -18,9 +19,9 @@ export default function TagModal(props) {
     
     const handleSave = () => {
         setShow(false)
-        // 입력한 태그를 태그 입력 화면으로 넘기는 코드
         props.setTags(tags)
         props.setTitle(title)
+        // 입력한 태그를 POST방식으로 서버로 보내줘야함
     }
 
 
@@ -54,8 +55,9 @@ export default function TagModal(props) {
   
   return (
     <>
-        <Button variant="primary" onClick={handleShow} >
-            태그 설정하기
+        <Button variant="outline-primary" onClick={handleShow}
+        className={styles.btn_modal}>
+            # 태그
         </Button>
 
         <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter"
@@ -87,14 +89,14 @@ export default function TagModal(props) {
                     />
                 </TagsInput>
 
-                <h4>서버에서 받은 예시 ~~룩들을 대강 보기 좋게 나열하면 될듯?</h4>
+                <h4>서버에서 GET방식으로 서브 타이틀을 받아와서 리스트로 정렬</h4>
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="outline-danger" onClick={handleClose} className={styles.modal_save_btn}>
                     닫기
                 </Button>
-                <Button variant="primary" onClick={handleSave}>
+                <Button variant="danger" onClick={handleSave} className={styles.modal_save_btn}>
                     등록하기
                 </Button>
             </Modal.Footer>
@@ -110,20 +112,22 @@ export default function TagModal(props) {
 
 
 export const TagsInput = styled.div`
-    margin: 0 8px;
+    margin: 10px 8px;
     display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
   min-height: 48px;
-  padding: 0 8px;
-  border: 1px solid rgb(214, 216, 218);
+  padding: 0px 10px;
+
+  // 색상 - 태두리
+  border: 2px solid #c74630;
   border-radius: 6px;
 
   > ul {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    margin: 8px 0 0 0;
+    margin: 10px 0 0 0;
 
     > .tag {
       width: auto;
@@ -137,7 +141,7 @@ export const TagsInput = styled.div`
       list-style: none;
       border-radius: 6px;
       margin: 0 8px 8px 0;
-      background: #4000c7;
+      background: #cf4d36;
         
       > .tag-close-icon {
         display: block;
@@ -147,7 +151,7 @@ export const TagsInput = styled.div`
         text-align: center;
         font-size: 20px;
         margin-left: 10px;
-        color: #4000c7;
+        color: #cf4d36;
         border-radius: 50%;
         background: #fff;
         cursor: pointer;
@@ -160,14 +164,14 @@ export const TagsInput = styled.div`
     border: none;
     height: 60px;
     font-size: 20px;
-    padding: 4px 0 0 0;
+    padding: 6px 0 0 0;
     :focus {
     outline: transparent;
   }
   }
 
   &:focus-within {
-    border: 1px solid #4000c7;
+    border: 1px solid #c74630;
   }
 
 `;

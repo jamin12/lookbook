@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+
 .App {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto_Sans';
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+@font-face {
+  font-family: 'Noto_Sans';
+  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
 }
 
 @media (prefers-reduced-motion: no-preference) {
