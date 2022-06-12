@@ -3,6 +3,7 @@ import {Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Modal from './Tags/TagModal';
 import styles from '../style/Tag.module.css';
+import axios from 'axios';
 // import Modal from '../components/ModalTag'
 
 export default function Tag(props){
@@ -24,6 +25,16 @@ export default function Tag(props){
     
     const onStudy = () => {
         // 서버쪽에 title이랑 태그값 전달해줘야 함
+        axios.post("url", {
+            title: title,
+            tags: tags
+        })
+        .then(Response => {
+            alert("학습이 시작되었습니다.")
+        }).catch(error => {
+            alert("데이터 전달 중 에러 발생!")
+        })
+
         navigate(
             "/result",
             {state: { age: age, gender: gender, title: title, tags: tags,}}

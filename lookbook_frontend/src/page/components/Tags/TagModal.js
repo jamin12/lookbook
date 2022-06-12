@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import TagTitleRadioBtn from '../Tags/TagTitleRadio'
 import styled from 'styled-components';
 import styles from '../../style/Tag.module.css';
+import axios from 'axios';
 
 
 export default function TagModal(props) {
@@ -11,6 +12,7 @@ export default function TagModal(props) {
     const initialTags = [];
     const [tags, setTags] = useState(initialTags);
     const [title, setTitle] = useState('');
+    const [subTag, setSubTag] = useState([]);
 
 
 
@@ -48,6 +50,22 @@ export default function TagModal(props) {
         event.target.value ="";
       }
     }
+
+
+    const getSubTag = () => {
+        setSubTag([]);
+        const response = axios.get('http://localhost:8080/tags')
+          .then(response => {
+              setSubTag(response.data.tag_name);
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    }
+
+    useEffect(() => {
+      getSubTag();
+    }, [])
 
 
   
@@ -88,7 +106,10 @@ export default function TagModal(props) {
                     />
                 </TagsInput>
 
-                <h4>서버에서 GET방식으로 서브 타이틀을 받아와서 리스트로 정렬</h4>
+                <h4></h4>
+                <ul>{subTag.map((tags, index) => 
+                            <li key={index}> # {tags} </li>)}
+                        </ul>
             </Modal.Body>
 
             <Modal.Footer>

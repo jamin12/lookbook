@@ -23,9 +23,12 @@
     font-family:  'Noto Sans KR', sans-serif;
     font-weight: bold;
     margin: 0px 0 10px 0;
-    font-size: 3em;
-
+    font-size: 40px;
 }
+
+
+
+
 .main_body > p {
     font-weight: lighter;
 }
