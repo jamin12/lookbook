@@ -27,12 +27,13 @@
 .main_body > h1 {
     margin: 100px 0 10px 0px;
     font-weight: bold;
-    font-size: 2em;
+    font-size: 40px;
     font-family: 'Noto Sans KR', sans-serif;
 
 }
 .main_body > p {
     font-weight: lighter;
+    font-size: 10px;
 }
 
 
@@ -45,7 +46,7 @@
 }
 
 .contents_info_msg {
-    margin: 60px 0 0 0px;
+    margin: 40px 0 0 0px;
     color: #868686;
 }
 .contents_info_msg > p:last-child {
@@ -61,7 +62,7 @@
 .result li{
     list-style: none;
     display: inline-block;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .result h4,
@@ -70,6 +71,7 @@
     border-radius: 50px;
     width: 250px;
     height: 50px;
+    font-size: 1em;
     text-align: center;
      line-height: 40px;  /*height랑 비스무리하게 설정해주면 됨  */
 
@@ -88,7 +90,7 @@
 }
 
 .btn_group > Button {
-    font-size: 1.5em;
+    font-size: 1.1em;
     padding: 200px, 20px;
 }
 .btn_group > Button:first-child {
@@ -101,7 +103,7 @@
 /* 모달창 */
 .btn_modal {
     padding: 10px 30px;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 600;
     border-radius: 0px;
     border: 1px solid #868686;
@@ -116,7 +118,7 @@
 }
 
 .modal_save_btn {
-    font-size: 1.3em;
+    font-size: 1em;
     padding-left: 20px;
     padding-right: 20px;
 }
