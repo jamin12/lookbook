@@ -21,9 +21,14 @@ export default function Tag(props){
         document.location.href = '/'
     }
 
-    const tagList = tags.map((tags, index) => {
-            <li key={index}>{tags}</li>
-    })
+    
+    const onStudy = () => {
+        // 서버쪽에 title이랑 태그값 전달해줘야 함
+        navigate(
+            "/result",
+            {state: { age: age, gender: gender, title: title, tags: tags,}}
+        )
+    }
 
 
     return(
@@ -66,11 +71,7 @@ export default function Tag(props){
 
                     <div className={styles.btn_group}>
                         <Button variant="outline-primary" onClick={ clickPrevPage }>뒤로가기</Button>{' '}
-                        <Button variant="primary" onClick={() => 
-                            navigate(
-                                "/result",
-                                {state: { age: age, gender: gender, title: title, tags: tags,}}
-                            )}>
+                        <Button variant="primary" onClick={onStudy}>
                             학습 시작하기
                         </Button>
                     </div>
