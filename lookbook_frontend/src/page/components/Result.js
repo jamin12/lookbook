@@ -11,7 +11,7 @@ const Result = (  ) => {
 
     const { state } = useLocation();
 
-    console.log(state.age);
+    console.log(state.tags);
     return (
         <div className="App">
             <h1>추천 결과 보기</h1>
@@ -20,6 +20,9 @@ const Result = (  ) => {
 
             <h4># { state.age }</h4>
             <h4># { state.gender }</h4>
+            <br/>
+            <h4># { state.title }_패션</h4>
+            {state.tags.map(tags => <h4>#{tags}</h4>)}
             {/* <h4># { this.location.gender }</h4> */}
 
             <Button variant="primary" onClick={ clickBackPage }>처음 화면으로</Button>

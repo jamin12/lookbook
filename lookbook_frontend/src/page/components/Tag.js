@@ -1,13 +1,19 @@
+import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import {Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Modal from './TagModal';
+import Modal from './Tags/TagModal';
 // import Modal from '../components/ModalTag'
 
 export default function Tag(props){
-    
+
     var gender = "여자";
     var age = 22;
+
+    const initialTags = ['TEST',];
+    const [tags, setTags] = useState(initialTags);
+    const [title, setTitle] = useState('');
+
 
     const navigate = useNavigate();
     // 이전 페이지로 이동
@@ -30,7 +36,12 @@ export default function Tag(props){
                 <p>EX) #데이트룩, #하객룩</p> 
                 
                 {/* 모달창 */}
-                <Modal/>
+                <Modal setTitle={setTitle} setTags={setTags} />
+
+                {/* 태그 결과 */}
+                <h4>{title} 패션</h4>
+                {tags.map(tags => <h4>#{tags}</h4>)}
+                
                 
                 <br/>
                 <br/>
@@ -43,7 +54,7 @@ export default function Tag(props){
                 <Button variant="primary" onClick={() => 
                     navigate(
                         "/result",
-                        {state: { age: age, gender: gender}}
+                        {state: { age: age, gender: gender, title: title, tags: tags,}}
                     )  
                 }>학습 시작하기
                 </Button>

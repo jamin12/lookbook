@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 
 
-function TagTitleRadio(){
+function TagTitleRadio(props){
     const [check, setCheck] = useState([])
 
     const changeRadio = e => {
         if(e.target.checked){
             setCheck(e.target.id)
-            console.log(e.target.id)
+            props.setTitle(e.target.id)
         }
     }
+
 
     return (
         <>
@@ -18,7 +19,7 @@ function TagTitleRadio(){
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='1'
+                        id='트레디셔널'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
@@ -28,7 +29,7 @@ function TagTitleRadio(){
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='2'
+                        id='네추럴'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
@@ -38,18 +39,18 @@ function TagTitleRadio(){
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='3'
+                        id='모던'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
                     />
                     <FormCheckText>모던</FormCheckText>
                 </label>
-                <br/>
+                
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='4'
+                        id='로멘틱/섹시'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
@@ -59,17 +60,17 @@ function TagTitleRadio(){
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='5'
+                        id='캐주얼'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
                     />
-                    <FormCheckText>케주얼</FormCheckText>
+                    <FormCheckText>캐주얼</FormCheckText>
                 </label>
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='6'
+                        id='레트로/키치'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
@@ -79,7 +80,7 @@ function TagTitleRadio(){
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='7'
+                        id='힙합/펑크'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
@@ -94,6 +95,7 @@ export default TagTitleRadio;
 
 const FormCheckText = styled.span`
   font-size: 18px;
+  margin: 0px 5px 10px 10px;
   width: 110px;
   height: 35px;
   background: #e6e6e6;
