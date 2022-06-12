@@ -21,7 +21,6 @@ export default function TagModal(props) {
         setShow(false)
         props.setTags(tags)
         props.setTitle(title)
-        // 입력한 태그를 POST방식으로 서버로 보내줘야함
     }
 
 
