@@ -67,8 +67,6 @@ async def imgDetector(img,
         cv2.rectangle(img, (x,y), (x+w, y+h), (255,255,255), thickness=2)
         cv2.putText(img,info,(x,y-15),0, 0.5, (0, 255, 0), 1)
         return_value += info
-    cv2.imshow("test",img)
-    cv2.waitKey(3000)
     return return_value
 
 

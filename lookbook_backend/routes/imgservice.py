@@ -40,5 +40,4 @@ async def resultPage():
         # img.show('img',img)
         img_converted = await imgtobytes.from_image_to_bytes(img)
         img_list.append(img_converted)
-    print(img_list)
     return JSONResponse(img_list)

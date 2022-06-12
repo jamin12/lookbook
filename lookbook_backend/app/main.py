@@ -14,7 +14,7 @@ from database.conn import db, Base
 from middlewares.token_validator import access_control
 from middlewares.trusted_hosts import TrustedHostMiddleware
 
-from routes import imgservice
+from routes import imgservice,tagservice
 
 
 def create_app():
@@ -50,6 +50,7 @@ def create_app():
                        except_path=[])
     # 라우터 정의
     app.include_router(imgservice.router,tags=["imgservice"])
+    app.include_router(tagservice.router,tags=["tag"])
     return app
 
 
