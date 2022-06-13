@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 function Home() {
 
     const clickTag = () => {
-        document.location.href = '/tag';
+        document.location.href = '/webcam';
     }
 
     return(

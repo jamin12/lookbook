@@ -1,6 +1,7 @@
 import Tag from './page/components/Tag';
 import Result from './page/components/Result'
 import Home from './page/components/Home';
+import Webcam from './page/components/WebCapture';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 
@@ -10,6 +11,7 @@ function App() {
         <BrowserRouter>
             <Routes>
               <Route path="/" exact={true} element={ <Home/> }/> ;
+                <Route path="/webcam" element={ <Webcam/> }/> ;
                 <Route path="/tag" element={ <Tag/> }/> ;
                 <Route path="/result" element={ <Result/> }/>;
             </Routes>

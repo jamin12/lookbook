@@ -30,7 +30,7 @@ async def uploadImg(in_files: List[UploadFile] = File(...)):
             f.write(file.file.read())
         file_urls = saved_file_name
     predict_value = await face_recognize.getPredict(file_urls)
-    result : dict = {"predict img" : predict_value}
+    result : dict = {"predict_img" : predict_value}
     return result
 
 @router.post("/results",response_model=res_m.res_imgs)

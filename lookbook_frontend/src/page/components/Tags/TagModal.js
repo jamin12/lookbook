@@ -23,6 +23,15 @@ export default function TagModal(props) {
         setShow(false)
         props.setTags(tags)
         props.setTitle(title)
+
+        setSubTag([]);
+        const response = axios.get('http://localhost:8080/tags')
+          .then(response => {
+              setSubTag(response.data.tag_name);
+          })
+          .catch(err => {
+            console.log(err)
+        })
     }
 
 
@@ -53,14 +62,7 @@ export default function TagModal(props) {
 
 
     const getSubTag = () => {
-        setSubTag([]);
-        const response = axios.get('http://localhost:8080/tags')
-          .then(response => {
-              setSubTag(response.data.tag_name);
-          })
-          .catch(err => {
-            console.log(err)
-          })
+
     }
 
     useEffect(() => {
@@ -107,9 +109,11 @@ export default function TagModal(props) {
                 </TagsInput>
 
                 <h4></h4>
-                <ul>{subTag.map((tags, index) => 
-                            <li key={index}> # {tags} </li>)}
-                        </ul>
+                <ul className={styles.subTitle}>
+                  <p>예시</p>
+                    {subTag.map((tags, index) => 
+                      <li key={index} className={styles.subTitleTag}> {tags} </li>)}
+                </ul>
             </Modal.Body>
 
             <Modal.Footer>

@@ -29,11 +29,10 @@ export default function Tag(props){
 
     
     const onStudy = async() => {
-        // 서버쪽에 title이랑 태그값 전달해줘야 함
         const response = await axios.post('http://localhost:8080/results',{
-            'age': 0,
-            "tag_title": "String",
-            "tag_subtitle": "string"
+            'age': age,
+            "tag_title": title,
+            "tag_subtitle": tags
         })
             .then(response => {
                 console.log("성공")
@@ -89,6 +88,7 @@ export default function Tag(props){
                     <div className={styles.contents_prev}>
 
                         {/* 나이 받아와야함 */}
+                        
 {/* ================================================================== */}
 
                         <h4>예측 나이: {age}</h4>
