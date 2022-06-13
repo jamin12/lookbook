@@ -1,7 +1,11 @@
-from pip import main
+from os import path as op
+from sys import path as sp
+sp.append(op.dirname(op.dirname(__file__)))
 import requests
-from date_utils import D
+from utils.date_utils import D
 import datetime
+
+
 
 class weather:
     current_time : datetime = D.datetime(9)

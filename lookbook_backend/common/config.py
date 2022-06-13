@@ -25,7 +25,7 @@ class LocalConfig(Config):
     """
     개발 모드
     """
-    DB_URL: str = f"mysql+pymysql://root:1234@127.0.0.1:3306/rtds?charset=utf8mb4"
+    DB_URL: str = f"mysql+pymysql://root:wzqxec951@127.0.0.1:3306/lookbook?charset=utf8mb4"
     
     TRUSTED_HOSTS = ["*"]
     ALLOW_SITE = ["*"]  
