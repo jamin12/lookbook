@@ -16,7 +16,7 @@ from PIL import Image
 import response_models as res_m
 import request_models as req_m
 
-IMG_DIR = "./lookbook_backend/machinelearning/img/"
+IMG_DIR = "D:/K-Fashion/Validation/origindata/"
 
 router = APIRouter()
 
@@ -24,7 +24,7 @@ router = APIRouter()
 async def uploadImg(in_files: List[UploadFile] = File(...)):
     file_urls = ''
     for file in in_files:
-        currentTime = D.datetime().strftime("%Y%res_m%d%H%M%S")
+        currentTime = D.datetime().strftime("%Y%m%d%H%M%S")
         saved_file_name = ''.join([currentTime,secrets.token_hex(16),".jpg"])
         file_location = os.path.join(IMG_DIR,saved_file_name)
         with open(file_location,"wb+") as f:
@@ -37,12 +37,14 @@ async def uploadImg(in_files: List[UploadFile] = File(...)):
 @router.post("/result",response_class=FileResponse)
 async def resultPage(request: Request,style_info : req_m.req_result_info):
     season : str = ""
-    temp : str = weather.get_temperature()
+    # temp : str = weather.get_temperature()
+    temp = "10"
     if float(temp) > 5 and float(temp) < 20:
         season = "봄/가을"
     elif float(temp) >= 20 and float(temp) < 30:
         season = "여름"
     elif float(temp) < 5:
         season = "겨울"
-    img_list = os.listdir(IMG_DIR)
-    return ''.join([IMG_DIR,img_list[randrange(0,len(img_list))]])
+    img_url = f"{IMG_DIR}{style_info.tag_title}/{style_info.tag_subtitle}/"
+    img_list = os.listdir(img_url)
+    return ''.join([img_url,img_list[randrange(0,len(img_list))]])
