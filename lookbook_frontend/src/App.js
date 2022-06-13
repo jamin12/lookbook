@@ -12,7 +12,7 @@ function App() {
             <Routes>
               <Route path="/" exact={true} element={ <Home/> }/> ;
                 <Route path="/webcam" element={ <Webcam/> }/> ;
-                <Route path="/tag" element={ <Tag/> }/> ;
+                <Route path="/tag" element={ <Tag/> } name="age"/> ;
                 <Route path="/result" element={ <Result/> }/>;
             </Routes>
         </BrowserRouter>

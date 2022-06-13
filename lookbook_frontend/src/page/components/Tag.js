@@ -31,7 +31,12 @@ export default function Tag(props){
 
     
     const onStudy = async() => {
-        const response = await axios.post('http://localhost:8080/results',{
+
+        navigate(
+            "/result",
+            {state: { age: age, gender: gender, title: title, tags: tags,}}
+        )
+        await axios.post('http://localhost:8080/results',{
             'age': age,
             "tag_title": title,
             "tag_subtitle": tags
@@ -59,20 +64,6 @@ export default function Tag(props){
                 setImg(imgSrc)
                 console.log(img)
             })
-        
-        // console.log(JSON.stringify(base64))
-
-        // // bytes로 디코딩
-        // const baseToBytes = base64.map(base64 => {
-        //     var test = window.atob(base64)
-        // })
-        // setByte(baseToBytes);
-        // console.log(JSON.stringify(byte))
-
-        navigate(
-            "/result",
-            {state: { age: age, gender: gender, title: title, tags: tags,}}
-        )
     }
 
 
@@ -89,11 +80,7 @@ export default function Tag(props){
                 <contents>
                     <div className={styles.contents_prev}>
 
-                        {/* 나이 받아와야함 */}
-                        
-{/* ================================================================== */}
-
-                        <h4>예측 나이: {age}</h4>
+                        <h4>예측 나이: {props.age}</h4>
                         <h4>예측 성별: {gender}</h4>
                     </div>
                     <div className={styles.contents_info_msg}>

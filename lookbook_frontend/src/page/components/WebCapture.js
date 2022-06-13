@@ -26,7 +26,7 @@ class WebcamCapture extends Component{
       .then((res) => {
         setImageUrl(res.data);
         setAge(res.data.predict_img)
-        console.log(res.data.predict_img);
+        console.log(res.data.predict_img)
       })
       .catch((err) => {
         console.error(err);
