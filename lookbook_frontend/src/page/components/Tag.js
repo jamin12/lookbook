@@ -9,11 +9,11 @@ import axios from 'axios';
 export default function Tag(props){
 
     const [gender, setGender] = useState('여자');
-    const [age, setAge] = useState(22);
+    const [age, setAge] = useState(null);
 
     const initialTags = [];
     const [tags, setTags] = useState(initialTags);
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState();
 
 
     const [ascii, setAscii] = useState([]);
@@ -26,6 +26,8 @@ export default function Tag(props){
     const clickPrevPage = () => {
         document.location.href = '/'
     }
+
+    // setAge(props.age)
 
     
     const onStudy = async() => {

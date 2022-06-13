@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import Webcam from "react-webcam";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 class WebcamCapture extends Component{
@@ -33,13 +33,6 @@ class WebcamCapture extends Component{
       })
   };
 
-    navigate = useNavigate();
-    onNextPage = () => {
-        navigate(
-            "/tag",
-            {state: { 'age': age }}
-        )
-    }
 
   
 
@@ -65,7 +58,7 @@ class WebcamCapture extends Component{
         <button onClick={this.capture}>Capture photo</button>
         {imageSrc && <img src={imageSrc} />}
 
-        <button onClick={this.onNextPage}>다음화면으로</button>
+        <Link to='/tag'><button>다음 페이지로</button></Link>
 
       </div>
     );
