@@ -6,55 +6,32 @@ import base64 from 'base-64'
 
 
 
-const Result = (  ) => {
-    
-    const [ascii, setAscii] = useState([]);
-    const [base64, setBase64] = useState([]);
-    const [byte, setByte] = useState([]);
+const Result = ( props ) => {
+    // props
     const [img, setImg] = useState([]);
+    const { state } = useLocation();
+    const [url, setUrl] = useState(null);
+
+    const title_ = state.title;
+    const subTitle_ = state.subTitle;
 
     //처음 화면으로 이동
     const clickBackPage = () =>{
         document.location.href = '/'
     }
 
-    const { state } = useLocation();
 
     const axios = require('axios');
     
-    function decode(str) {
-        for(var i in base64) {
-            var decodedStr = atob(str[i]);
-            setByte(decodedStr);
-        }
-    }
-
     const getImg = async() => {
-        const response = await axios.post('http://localhost:8080/results',{
-            "age": 0,
-            "tag_title": "string",
-            "tag_subtitle": "string"
+        const response = axios.post('http://192.168.20.82:8080/result',{
+            "tag_title": title_,
+            "tag_subtitle": subTitle_
+        },{
+            responseType: 'blob',
         })
             .then(response => {
-                setAscii(response.data.imgs)
-                console.log(ascii)
-
-                var asciiToBase = []
-                asciiToBase.push(window.btoa(ascii[0]))
-                asciiToBase.push(window.btoa(ascii[1]))
-                setBase64(asciiToBase)
-                console.log(base64)
-
-                var baseToBytes = []
-                baseToBytes.push(window.btoa(base64[0]))
-                baseToBytes.push(window.btoa(base64[1]))
-                setByte(baseToBytes)
-                console.log(byte)
-                var data = byte[0]
-
-                var imgSrc =  "data:image/jpg;base64," + data;
-                setImg(imgSrc)
-                console.log(img)
+                setImg(window.URL.createObjectURL(response.data));
             })
         
     }
@@ -75,13 +52,13 @@ const Result = (  ) => {
                         <h4># { state.age }세</h4>
                         <h4># { state.gender }</h4>
                         <h4># { state.title }_패션</h4>
+                        <h4># { state.subTitle }룩</h4>
                     </div>
                     
                     <div className={styles.contents_tag}>
-                        
-                        <ul>{state.tags.map((tags, index) => 
+                        {/* <ul>{state.tags.map((tags, index) => 
                             <li key={index}> # {tags} </li>)}
-                        </ul>
+                        </ul> */}
                     </div>
 
                 </contents>
@@ -94,10 +71,11 @@ const Result = (  ) => {
             <header className={styles.main_header}>
                 {/* <img src="data:image/<이미지확장자>;base64,<data코드>" /> */}
                 {/* 여기 사이트 참고 -> https://im-designloper.tistory.com/57 */}
-
-                <img className={styles.main_img} alt="기본이미지" src={img}/>
+                
+                {/* <img className={styles.main_img} alt="기본이미지" src={img}/> */}
+                {/* <img src="blob:http://192.168.20.82:8080/be8b3852-f105-4a44-951e-6530e206b388" id="image" className={styles.main_img}></img> */}
+                <img src={img} id="image" className={styles.main_img}></img>
             </header>
-        
         </div>
     );
 }

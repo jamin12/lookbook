@@ -26,7 +26,7 @@ def create_app():
     app = FastAPI()
     ## 타입 어노테이션을 지정해야 asdict에 데이터가 들어감...(신기)
     conf_dict = asdict(c)
-    db.init_app(app, **conf_dict)
+    # db.init_app(app, **conf_dict)
 
     #테이블 생성
     """

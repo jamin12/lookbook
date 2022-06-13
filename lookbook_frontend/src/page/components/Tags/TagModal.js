@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import {Button , ButtonGroup} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import TagTitleRadioBtn from '../Tags/TagTitleRadio'
 import styled from 'styled-components';
 import styles from '../../style/Tag.module.css';
 import axios from 'axios';
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 
 export default function TagModal(props) {
     const [show, setShow] = useState(false);
-    const initialTags = [];
-    const [tags, setTags] = useState(initialTags);
+
+    // props
+    const [tags, setTags] = useState([]);
     const [title, setTitle] = useState('');
-    const [subTag, setSubTag] = useState([]);
+    const [subTitle, setSubTitle] = useState('');
+    // 내가 임시로 저장해놓는 곳
+    const [subTag, setSubTag] = useState('');
+
+    // 토글버튼
+    const [checked, setChecked] = useState(false);
+    const [btnValue, setBtnValue] = useState(null);
+    
 
 
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    
+    const handleShow = () => {
+      setShow(true);
+      setSubTitle(null);
+    }
     
     const handleSave = () => {
         setShow(false)
-        props.setTags(tags)
         props.setTitle(title)
-
-        setSubTag([]);
-        const response = axios.get('http://localhost:8080/tags')
-          .then(response => {
-              setSubTag(response.data.tag_name);
-          })
-          .catch(err => {
-            console.log(err)
-        })
     }
 
 
@@ -46,32 +49,12 @@ export default function TagModal(props) {
     };
     
     // 태그 추가 기능 
-    const addTags = (event) => { 
-      let value = event.target.value.trim();
-      // 이미 입력되어 있는 태그인지 검사하여 이미 있는 태그라면 추가하지 말기
-      // 아무것도 입력하지 않은 채 Enter 키 입력시 메소드 실행하지 말기
-      if(event.key === 'Enter' && !tags.includes(value) && value){
-        setTags([...tags, value]);
-        // 태그가 추가되면 input 창 비우기
-        event.target.value ="";
-      }
-      else if(event.key === 'Enter' && !value){
-        event.target.value ="";
-      }
+    const addTags = (e) => { 
+      props.setSubTitle(e.target.id)
+      setBtnValue(e.currentTarget.tag)
     }
 
 
-    const getSubTag = () => {
-
-    }
-
-    useEffect(() => {
-      getSubTag();
-    }, [])
-
-
-  
-  
   return (
     <>
         <Button variant="outline-primary" onClick={handleShow}
@@ -86,34 +69,33 @@ export default function TagModal(props) {
             </Modal.Header>
         
             <Modal.Body>
+                {/* 태그 타이틀 설정 */}
+                <TagTitleRadioBtn setTitle={setTitle} setTags={setTags}/>
 
-                <TagTitleRadioBtn setTitle={setTitle}/>
+                  <p>카테고리 설정</p>
 
-                <TagsInput>
-                    <ul id='tags'>
-                      {tags.map((tag, index) => (
-                        <li key={index} className='tag'>
-                          <span className='tag-title'>{tag}</span>
-                          <span className='tag-close-icon' 
-                                onClick={() => removeTags(index)}>&times;
-                          </span>
-                        </li>
+                  <ButtonGroup className="mb-2">
+                      {tags.map((tag, idx) => (
+                          <ToggleButton
+                              key={idx}
+                              id={`${tag}`}
+                              type="radio"
+                              variant="outline-danger"
+                              name="radio"
+                              value={tag}
+                              checked={btnValue === tag}
+                              onChange={addTags}
+                          >
+                          {tag}
+                        </ToggleButton>
                       ))}
-                    </ul>
-                    <input
-                      className='tag-input'
-                      type='text'
-                      onKeyUp={(event) => {addTags(event)}}
-                      placeholder='Press enter to add tags'
-                    />
-                </TagsInput>
+                  </ButtonGroup>
 
-                <h4></h4>
-                <ul className={styles.subTitle}>
-                  <p>예시</p>
-                    {subTag.map((tags, index) => 
-                      <li key={index} className={styles.subTitleTag}> {tags} </li>)}
-                </ul>
+                  {/* // {tags.map((tags, index) => 
+                  //     <li key={index} className={styles.subTitleTag}>
+                  //       <ToggleButton onClick={addTags} id={tags} variant="outline-danger"> #{tags} </ToggleButton>  
+                  //     </li>
+                  // )} */}
             </Modal.Body>
 
             <Modal.Footer>
