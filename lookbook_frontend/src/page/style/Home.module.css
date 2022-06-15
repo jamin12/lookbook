@@ -1,0 +1,25 @@
+.btn {
+    border: 0px solid #ccc;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.501), rgba(0, 0, 0, 0.426) ),url(../../../public/img/bg_img.jpg);
+    background-size: cover;
+    color: white;
+}
+
+.btn > h1 {
+    font-size:5em;
+    font-weight: bold;
+}
+.btn > h2 {
+    font-size:2.5em;
+    font-weight: 300;
+}
+.btn > h4 {
+    font-weight: 200;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%)
+
+}

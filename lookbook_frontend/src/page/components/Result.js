@@ -65,7 +65,7 @@ const Result = ( props ) => {
                 <Button className={styles.btn} variant="danger" onClick={ clickBackPage } size="lg">
                     처음 화면으로
                 </Button>
-                <Button onClick={getImg}>TEST</Button>
+                <Button onClick={getImg} variant="outline-danger">다른 사진 보기</Button>
             </body>
             
             <header className={styles.main_header}>
