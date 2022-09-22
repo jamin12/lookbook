@@ -1,5 +1,9 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import styled from 'styled-components';
+
+
+const REQUEST_URL = "http://192.168.20.82:8080/tags/"
 
 
 function TagTitleRadio(props){
@@ -9,6 +13,11 @@ function TagTitleRadio(props){
         if(e.target.checked){
             setCheck(e.target.id)
             props.setTitle(e.target.id)
+            axios.get(REQUEST_URL + e.target.id)
+            .then(response => {
+                // console.log(response.data.tag_name)
+                props.setTags(response.data.tag_name)
+            })
         }
     }
 
@@ -16,47 +25,6 @@ function TagTitleRadio(props){
     return (
         <>
             <div>
-                <label>
-                    <FormCheckLeft
-                        type="radio"
-                        id='트레디셔널'
-                        name="radioButton"
-                        onChange={changeRadio}
-                        value={check}
-                    />
-                    <FormCheckText>트레디셔널</FormCheckText>
-                </label>
-                <label>
-                    <FormCheckLeft
-                        type="radio"
-                        id='네추럴'
-                        name="radioButton"
-                        onChange={changeRadio}
-                        value={check}
-                    />
-                    <FormCheckText>네추럴</FormCheckText>
-                </label>
-                <label>
-                    <FormCheckLeft
-                        type="radio"
-                        id='모던'
-                        name="radioButton"
-                        onChange={changeRadio}
-                        value={check}
-                    />
-                    <FormCheckText>모던</FormCheckText>
-                </label>
-                
-                <label>
-                    <FormCheckLeft
-                        type="radio"
-                        id='로멘틱/섹시'
-                        name="radioButton"
-                        onChange={changeRadio}
-                        value={check}
-                    />
-                    <FormCheckText>로멘틱/섹시</FormCheckText>
-                </label>
                 <label>
                     <FormCheckLeft
                         type="radio"
@@ -70,7 +38,28 @@ function TagTitleRadio(props){
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='레트로/키치'
+                        id='트레디셔널'
+                        name="radioButton"
+                        onChange={changeRadio}
+                        value={check}
+                    />
+                    <FormCheckText>트레디셔널</FormCheckText>
+                </label>
+                <label>
+                    <FormCheckLeft
+                        type="radio"
+                        id='섹시로맨틱'
+                        name="radioButton"
+                        onChange={changeRadio}
+                        value={check}
+                    />
+                    <FormCheckText>섹시/로맨틱</FormCheckText>
+                </label>
+                
+                <label>
+                    <FormCheckLeft
+                        type="radio"
+                        id='레트로키치'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
@@ -80,12 +69,32 @@ function TagTitleRadio(props){
                 <label>
                     <FormCheckLeft
                         type="radio"
-                        id='힙합/펑크'
+                        id='내츄럴'
                         name="radioButton"
                         onChange={changeRadio}
                         value={check}
                     />
-                    <FormCheckText>힙합/펑크</FormCheckText>
+                    <FormCheckText>내츄럴</FormCheckText>
+                </label>
+                <label>
+                    <FormCheckLeft
+                        type="radio"
+                        id='매니시모던'
+                        name="radioButton"
+                        onChange={changeRadio}
+                        value={check}
+                    />
+                    <FormCheckText>매니시/모던</FormCheckText>
+                </label>
+                <label>
+                    <FormCheckLeft
+                        type="radio"
+                        id='힙'
+                        name="radioButton"
+                        onChange={changeRadio}
+                        value={check}
+                    />
+                    <FormCheckText>힙</FormCheckText>
                 </label>
             </div>
         </>

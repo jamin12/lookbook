@@ -9,17 +9,14 @@ import axios from 'axios';
 export default function Tag(props){
 
     const [gender, setGender] = useState('여자');
-    const [age, setAge] = useState(22);
+    const [age, setAge] = useState(null);
 
-    const initialTags = [];
-    const [tags, setTags] = useState(initialTags);
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState();
+    const [subTitle, setSubTitle] = useState();
 
-
-    const [ascii, setAscii] = useState([]);
-    const [base64, setBase64] = useState([]);
-    const [byte, setByte] = useState([]);
-    const [img, setImg] = useState([]);
+    // 이미지
+    const [img, setImg] = useState();
+    const [imgHeader, setImgHeader] = useState();
 
     const navigate = useNavigate();
     // 이전 페이지로 이동
@@ -27,50 +24,22 @@ export default function Tag(props){
         document.location.href = '/'
     }
 
+    // setAge(props.age)
+
     
     const onStudy = async() => {
-        // 서버쪽에 title이랑 태그값 전달해줘야 함
-        const response = await axios.post('http://localhost:8080/results',{
-            'age': 0,
-            "tag_title": "String",
-            "tag_subtitle": "string"
+        axios.post('http://192.168.20.82:8080/result',{
+            "tag_title": title,
+            "tag_subtitle": subTitle
         })
             .then(response => {
-                console.log("성공")
                 alert("학습이 시작되었습니다.")
-                setAscii(response.data.imgs)
-                console.log(ascii)
-
-                var asciiToBase = []
-                asciiToBase.push(window.btoa(ascii[0]))
-                asciiToBase.push(window.btoa(ascii[1]))
-                setBase64(asciiToBase)
-                console.log(base64)
-
-                var baseToBytes = []
-                baseToBytes.push(window.btoa(base64[0]))
-                baseToBytes.push(window.btoa(base64[1]))
-                setByte(baseToBytes)
-                console.log(byte)
-                var data = byte[0]
-
-                var imgSrc =  "data:image/jpg;base64," + data;
-                setImg(imgSrc)
-                console.log(img)
+                setImg(response.body)
+                console.log(response.headers)
             })
-        
-        // console.log(JSON.stringify(base64))
-
-        // // bytes로 디코딩
-        // const baseToBytes = base64.map(base64 => {
-        //     var test = window.atob(base64)
-        // })
-        // setByte(baseToBytes);
-        // console.log(JSON.stringify(byte))
-
         navigate(
             "/result",
-            {state: { age: age, gender: gender, title: title, tags: tags,}}
+            {state: { age: age, gender: gender, title: title, subTitle: subTitle, img: img}}
         )
     }
 
@@ -88,10 +57,7 @@ export default function Tag(props){
                 <contents>
                     <div className={styles.contents_prev}>
 
-                        {/* 나이 받아와야함 */}
-{/* ================================================================== */}
-
-                        <h4>예측 나이: {age}</h4>
+                        <h4>예측 나이: {props.age}</h4>
                         <h4>예측 성별: {gender}</h4>
                     </div>
                     <div className={styles.contents_info_msg}>
@@ -99,15 +65,14 @@ export default function Tag(props){
                         <p>EX) #데이트룩, #하객룩</p> 
                     </div>
 
+
                     {/* 모달창 */}
-                    <Modal setTitle={setTitle} setTags={setTags} />
+                    <Modal setTitle={setTitle} setSubTitle={setSubTitle} />
 
                     {/* 태그 결과 */}
                     <div className={styles.result}>
                         <h4>{title} 패션</h4>
-                        <ul>{tags.map((tags, index) => 
-                            <li key={index}> # {tags} </li>)}
-                        </ul>
+                        <h4># {subTitle} </h4>
                     </div>
                     <br/>
                     <br/>
