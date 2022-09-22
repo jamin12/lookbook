@@ -20,6 +20,7 @@ async def api_logger(request: Request, response=None, error=None):
             error_file = frame.f_code.co_filename
             error_func = frame.f_code.co_name
             error_line = frame.f_lineno
+
         else:
             error_func = error_file = error_line = "UNKNOWN"
 

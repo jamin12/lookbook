@@ -1,12 +1,16 @@
 from os import path as op
 from sys import path as sp
 
+
 sp.append(op.dirname(op.dirname(__file__)))
 
 from sqlalchemy import (
     Column,
     DateTime,
+    Integer,
+    String,
     func,
+    null,
 )
 from sqlalchemy.orm import Session, backref, relationship
 
@@ -14,11 +18,11 @@ from database.conn import Base, db
 
 
 class BaseMixin:
-    created_at = Column(DateTime, nullable=False, default=func.utc_timestamp())
-    updated_at = Column(DateTime,
-                        nullable=False,
-                        default=func.utc_timestamp(),
-                        onupdate=func.utc_timestamp())
+    # created_at = Column(DateTime, nullable=False, default=func.utc_timestamp())
+    # updated_at = Column(DateTime,
+    #                     nullable=False,
+    #                     default=func.utc_timestamp(),
+    #                     onupdate=func.utc_timestamp())
 
     def __init__(self):
         self._q = None
@@ -179,3 +183,10 @@ class BaseMixin:
             self._session.close()
         else:
             self._session.flush()
+            
+
+class Category(Base,BaseMixin):
+    __tablename__ = "categories"
+    Id = Column(Integer, primary_key=True)
+    parents_Id = Column(Integer)
+    category_name = Column(String(64),nullable=False)
